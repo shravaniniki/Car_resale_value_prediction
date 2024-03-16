@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CarPriceEstimator.css';
+import Navbar from '../Navbar/Navbar';
 
 const CarPriceEstimator = () => {
     const [formData, setFormData] = useState({
@@ -32,6 +33,8 @@ const CarPriceEstimator = () => {
     };
 
     return (
+        <>
+        <Navbar/>
         <div className="row">
             <div className="col-md-6 col-sm-12 col-xs-6 col-lg-6">
                 <form onSubmit={handleSubmit}>
@@ -141,6 +144,7 @@ const CarPriceEstimator = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

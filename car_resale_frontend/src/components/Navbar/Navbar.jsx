@@ -43,16 +43,33 @@ const Navbar = ({ theme, setTheme }) => {
           </div>
           <nav className="hidden md:block">
             <ul className="flex items-center gap-8">
-              {Navlinks.map(({ id, name, link }) => (
-                <li key={id} className="py-4">
-                  <a
-                    href={link}
+                <li className="py-4">
+                  <a href={"/home"}
                     className=" text-lg font-medium  hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500  "
                   >
-                    {name}
+                    HOME
                   </a>
                 </li>
-              ))}
+                <li className="py-4">
+                  <a href={"/about"}
+                    className=" text-lg font-medium  hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500  "
+                  >
+                   SELLER
+                  </a>
+                </li><li className="py-4">
+                  <a href={"/contact"}
+                    className=" text-lg font-medium  hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500  "
+                  >
+                   BUYER
+                  </a>
+                </li>
+                <li className="py-4">
+                  <a href={"/prediction"}
+                    className=" text-lg font-medium  hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500  "
+                  >
+                    CAR PRICE PREDICTION
+                  </a>
+                </li>
               {/* DarkMode feature implement */}
               {theme === "dark" ? (
                 <BiSolidSun

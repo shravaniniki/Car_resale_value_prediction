@@ -1,7 +1,5 @@
-import React, { Component, useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import ReactDOM from "react-dom/client";
+import React from "react";
+
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 
 
@@ -16,44 +14,20 @@ import AppStoreBanner from "./components/AppStoreBanner/AppStoreBanner";
 import Contact from "./components/Contact/Contact";
 import Testimonial from "./components/Testimonial/Testimonial";
 import Footer from "./components/Footer/Footer";
+import { Home } from "./Home";
 
 const App = () => {
   // dark mode start
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
-  const element = document.documentElement;
-
-  useEffect(() => {
-    if (theme === "dark") {
-      element.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      element.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [theme]);
-  // dark mode end
-
-  React.useEffect(() => {
-    AOS.init({
-      offset: 100,
-      duration: 800,
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    AOS.refresh();
-  }, []);
+ 
   return (
     <>
     <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
-    <Navbar theme={theme} setTheme={setTheme} />
-                    <Hero theme={theme} />
     <Router>
                 <Routes>
-                   
+                    <Route path="/" element={<Home/>}/>
+                   <Route path="/navbar" element={<Navbar/>} />
                     <Route path="/about" element={<About/>} />
-                 
+                    <Route path="/hero" element={<Hero/>} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/carlist" element={<CarList/>} />
                     <Route path="/testimonal" element={<Testimonial />} />
