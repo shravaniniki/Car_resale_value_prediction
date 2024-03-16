@@ -1,9 +1,12 @@
 import React, { Component, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 
 
 // Component import
+import CarPriceEstimator from "./components/Prediction/CarPriceEstimator";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
@@ -42,17 +45,32 @@ const App = () => {
     AOS.refresh();
   }, []);
   return (
+    <>
     <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
-      <Navbar theme={theme} setTheme={setTheme} />
-      <Hero theme={theme} />
-      <About />
-      <Services />
-      <CarList />
-      <Testimonial />
-      <AppStoreBanner />
-      <Contact />
-      <Footer />
+    <Navbar theme={theme} setTheme={setTheme} />
+                    <Hero theme={theme} />
+    <Router>
+                <Routes>
+                   
+                    <Route path="/about" element={<About/>} />
+                 
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/carlist" element={<CarList/>} />
+                    <Route path="/testimonal" element={<Testimonial />} />
+                    <Route
+                        path="/contact"
+                        element={<Contact />}
+                    />
+                      <Route path="/prediction" element={<CarPriceEstimator/>} />
+
+                    <Route
+                        path="/footer"
+                        element={<Footer />}
+                    />
+                </Routes>
+            </Router>
     </div>
+    </>
   );
 };
 

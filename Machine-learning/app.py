@@ -1,14 +1,13 @@
-# import numpy as np
-
+import numpy as np
 from flask import Flask, request , jsonify,render_template
-# import pickle
+import pickle
 
 #Create flask app 
 app=Flask(__name__)
 
 #load the pickle model
 
-# model = pickle.load(open("XGBoost_regressor_model","rb"))
+model = pickle.load(open("XGBoost_regressor_model","rb"))
 
 
 @app.route('/')

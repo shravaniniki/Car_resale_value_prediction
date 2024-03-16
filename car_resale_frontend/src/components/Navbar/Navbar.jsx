@@ -12,17 +12,17 @@ export const Navlinks = [
   {
     id: 2,
     name: "SELLER",
-    link: "/#cars",
+    link: "/contact",
   },
   {
     id: 1,
     name: "BUYER",
-    link: "/#about",
+    link: "/about",
   },
   {
     id: 1,
     name: "CAR PRICE PREDICTION",
-    link: "/#prediction",
+    link: "/prediction",
   },
 ];
 const Navbar = ({ theme, setTheme }) => {
