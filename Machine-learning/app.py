@@ -1,23 +1,20 @@
-import numpy as np
 from flask import Flask, request , jsonify,render_template
+
 import pickle
+import pandas as pd
 
 #Create flask app 
 app=Flask(__name__)
 
 #load the pickle model
 
-model = pickle.load(open("XGBoost_regressor_model","rb"))
+model = pickle.load(open("XGBoost_Model.pkl","rb"))
+
+car_data = pd.read_csv('Cleaned_car.csv')
 
 
-@app.route('/')
-def CarPriceEstimator():
-    return {"member":["member1","member2"]}
-    # context = {
-    #     CAR_DATA_KEY: None,
-    #     CAR_VALUE_KEY: None
-    # }
-    # car_list = get_carlist()
+@app.route('/predict',method=['POST'])
+def predict():    
     
     # if request.method == "POST":
     #     car_name = request.form.get("car_name")
@@ -42,14 +39,8 @@ def CarPriceEstimator():
     #                                  max_power= max_power, 
     #                                  seats= seats
     #                                  )
-    #     carprice_df = carprice_data.get_car_data_as_dict()
-    #     carprice_predictor = CarPricePredictor(model_dir=MODEL_DIR)
-    #     carprice_value = carprice_predictor.predict(X=carprice_df)
-    #     context = {
-    #         CAR_DATA_KEY: carprice_data.get_car_data_as_dict(),
-    #         CAR_VALUE_KEY: round(carprice_value[0], 2),
-    #     }
-    #     return render_template('CarPriceEstimator.js', context=context)
+        
+        return render_template('CarPriceEstimator.js', context=context)
     # return render_template("CarPriceEstimator.js", context=context, car_list= car_list)
 
 
