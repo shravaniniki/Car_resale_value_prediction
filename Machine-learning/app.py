@@ -1,49 +1,61 @@
-from flask import Flask, request , jsonify,render_template
+# Backend - app.py
 
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pickle
 import pandas as pd
 
-#Create flask app 
-app=Flask(__name__)
 
-#load the pickle model
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-model = pickle.load(open("XGBoost_Model.pkl","rb"))
+@app.after_request
+def add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 
-car_data = pd.read_csv('Cleaned_car.csv')
-
-
-@app.route('/predict',method=['POST'])
-def predict():    
-    
-    # if request.method == "POST":
-    #     car_name = request.form.get("car_name")
-    #     vehicle_age = int(request.form.get("vehicle_age"))
-    #     km_driven = int(request.form.get("km_driven"))
-    #     seller_type = request.form.get("seller_type")
-    #     fuel_type = request.form.get("fuel_type")
-    #     transmission_type = request.form.get("transmission")
-    #     mileage = float(request.form.get("mileage"))
-    #     engine = int(request.form.get("engine"))
-    #     max_power = float(request.form.get("max_power"))
-    #     seats = int(request.form.get("seats"))
-
-    #     carprice_data = CarPriceData(car_name= car_name, 
-    #                                  vehicle_age= vehicle_age, 
-    #                                  km_driven= km_driven, 
-    #                                  seller_type= seller_type, 
-    #                                  fuel_type= fuel_type, 
-    #                                  transmission_type= transmission_type, 
-    #                                  mileage= mileage, 
-    #                                  engine= engine, 
-    #                                  max_power= max_power, 
-    #                                  seats= seats
-    #                                  )
-        
-        return render_template('CarPriceEstimator.js', context=context)
-    # return render_template("CarPriceEstimator.js", context=context, car_list= car_list)
+    return response
 
 
+# Load the trained model
+model = pickle.load(open('XGBoost_Model.pkl', 'rb'))
 
-if __name__ == "__main__":
+# Assuming your dataset is a pandas DataFrame named df
+new_data = pd.read_csv('cardekho_dataset.csv')
+
+car_names = new_data['car_name'].unique()
+
+@app.route('/')
+def index():
+    return "Welcome"
+
+@app.route('/prediction', methods=['POST'])
+def predict():
+    data = request.json
+    car_name = data['car_name']
+    vehicle_age = int(data['vehicle_age'])
+    km_driven = int(data['km_driven'])
+    seller_type = int(data['seller_type'])
+    fuel_type = int(data['fuel_type'])
+    transmission_type = int(data['transmission_type'])
+    mileage = float(data['mileage'])
+    engine = float(data['engine'])
+    max_power = float(data['max_power'])
+    seats = int(data['seats'])
+
+    # Assuming model.predict takes a 2D array as input
+    prediction = model.predict(pd.DataFrame([[car_name, vehicle_age, km_driven, seller_type, fuel_type, transmission_type, mileage, engine, max_power, seats]]))
+
+    # Return prediction as JSON response
+    return jsonify({'prediction': prediction.tolist()})
+
+@app.route('/car_names')
+def get_car_names():
+    try:
+        return jsonify({'car_names': car_names.tolist()})
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Error fetching car names'}), 500
+
+if __name__ == '__main__':
     app.run(debug=True)
