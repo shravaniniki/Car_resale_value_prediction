@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import './sellerPage.css'; // Import CSS file
 import Navbar from '../Navbar/Navbar';
 
-const SellerPage = () => {
+function SellerPage ()  {
+
+  const [file, setFile] = useState();
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+}
   const [carDetails, setCarDetails] = useState({
     car_name: '',
     vehicle_age: '',
@@ -17,10 +23,10 @@ const SellerPage = () => {
     max_power: '',
     seats: '',
     description: '',
-    photos: [],
+    image: [],
   });
 
-  const handleChange = (e) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
     setCarDetails({ ...carDetails, [name]: value });
   };
@@ -35,7 +41,7 @@ const SellerPage = () => {
       reader.onload = () => {
         uploadedPhotos.push(reader.result);
         if (uploadedPhotos.length === files.length) {
-          setCarDetails({ ...carDetails, photos: uploadedPhotos });
+          setCarDetails({ ...carDetails, image: uploadedPhotos });
         }
       };
     }
@@ -51,7 +57,7 @@ const SellerPage = () => {
     <Navbar/>
     <br/>
     <br/>
-    <div className="seller-page-container">
+    <div className="seller-page-container" id='search'>
       <h1>Sell Your Car</h1>
       <form onSubmit={handleSubmit}>
        
@@ -135,11 +141,21 @@ const SellerPage = () => {
           /> 
            <label>About Car</label>
           <input
-            type="Multiline"
+            type="text"
             name="descripton"
             value={carDetails.description}
             onChange={handleChange}
           /> 
+          <label>Upload Car Image</label>
+          <input
+           id="image"
+           type="file"
+           name="image"
+           onChange={handleOnChange}
+           value={carDetails.target}
+            />
+          <br/>
+          <br/>
           <button type="submit">Submit</button>
       </form>
     </div>

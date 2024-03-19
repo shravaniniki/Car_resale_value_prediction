@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
+import './CarPriceEstimator.css'
 
 function CarPriceEstimator() {
     const [prediction, setPrediction] = useState('');
