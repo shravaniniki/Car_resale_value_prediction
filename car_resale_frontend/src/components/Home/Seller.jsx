@@ -1,9 +1,16 @@
-import React from "react";
+import React from 'react'
 import CarPng from "../../assets/car1.png";
+import { useNavigate } from 'react-router-dom';
 
-const About = () => {
+function Seller() {
+  const navigate = useNavigate();
+  const navigateToSellerpage=()=>{
+    navigate('/sellerPage');
+  };
+
   return (
-    <div className="dark:bg-dark bg-slate-100 sm:min-h-[600px] sm:grid sm:place-items-center duration-300">
+    <>
+    <div className="dark:bg-dark bg-slate-100 sm:min-h-[600px] sm:grid sm:place-items-center duration-300" id="seller">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center">
           <div data-aos="slide-right" data-aos-duration="1500">
@@ -19,7 +26,7 @@ const About = () => {
                 data-aos="fade-up"
                 className="text-3xl sm:text-4xl font-bold font-serif"
               >
-                About us
+                Do you want to sell your car?
               </h1>
               <p data-aos="fade-up" className="leading-8 tracking-wide">
                 At CarSell we help car buyers and sellers to sell and buy their car's in 
@@ -28,7 +35,7 @@ const About = () => {
               <p data-aos="fade-up">
                 We help Car owners to predict their car price by our highly accurate car price predictor
               </p>
-              <button data-aos="fade-up" className="button-outline">
+              <button data-aos="fade-up" className="button-outline" onClick={navigateToSellerpage}>
                 Get Started
               </button>
             </div>
@@ -36,7 +43,9 @@ const About = () => {
         </div>
       </div>
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default About;
+export default Seller
+

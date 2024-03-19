@@ -2,6 +2,7 @@ import React from "react";
 import whiteCar from "../../assets/white-car.png";
 import car2 from "../../assets/car5.png";
 import car3 from "../../assets/car6.png";
+import { useNavigate } from "react-router-dom";
 
 const carList = [
   {
@@ -25,8 +26,15 @@ const carList = [
 ];
 
 const CarList = () => {
+  const navigate=useNavigate();
+
+  const navigateToSearchpage=()=>{
+    navigate("/search")
+  }
   return (
-    <div className="pb-24">
+    <>
+    <br/>
+    <div className="pb-24" id="carlist">
       <div className="container">
         {/* Heading */}
         <h1
@@ -70,12 +78,13 @@ const CarList = () => {
         </div>
         {/* End of car listing */}
         <div className="grid place-items-center mt-8">
-          <button data-aos="fade-up" className="button-outline">
+          <button data-aos="fade-up" className="button-outline" onClick={navigateToSearchpage}>
             Get Started
           </button>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

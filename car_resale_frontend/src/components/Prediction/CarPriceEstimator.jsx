@@ -26,8 +26,9 @@ function CarPriceEstimator() {
         // Make API call to Flask backend for prediction
         axios.post('http://127.0.0.1:5000/prediction', formData)
             .then(response => {
-                console.log(response.data.prediction);
-                setPrediction(response.data.prediction);
+                console.log(response.data.result);
+                console.log("Hello")
+                setPrediction(response.data.result);
             })
             .catch(error => {
                 console.error('Prediction API error:', error);
@@ -61,6 +62,7 @@ function CarPriceEstimator() {
                         <option key={index} value={carName}>{carName}</option>
                     ))}
                 </select>
+                
                 <input type="number" name="vehicle_age" placeholder="Vehicle Age" onChange={handleChange} />
                 <input type="number" name="km_driven" placeholder="Kilometers Driven" onChange={handleChange} />
                 <select name="seller_type" onChange={handleChange}>

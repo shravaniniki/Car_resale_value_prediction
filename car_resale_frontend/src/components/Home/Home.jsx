@@ -1,16 +1,15 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import Navbar from "./components/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
-import AppStoreBanner from "./components/AppStoreBanner/AppStoreBanner";
-import CarList from "./components/CarList/CarList";
-import Services from "./components/Services/Services";
-import Testimonial from "./components/Testimonial/Testimonial";
-import Contact from "./components/Contact/Contact";
-import Footer from "./components/Footer/Footer";
-import About from "./components/About/About";
+import Navbar from "../Navbar/Navbar";
+import Hero from "../Hero/Hero";
+import CarList from "../CarList/CarList";
+import Services from "./Services";
+import Testimonial from "../Testimonial/Testimonial";
+import Contact from "../Contact/Contact";
+import Footer from "./Footer";
+import Seller from "./Seller";
 
 
 
@@ -44,8 +43,7 @@ export const Home = () => {
     <>
     <Navbar theme={theme} setTheme={setTheme} />
     <Hero theme={theme} />
-    <About/>
-    <AppStoreBanner/>
+    <Seller/>
     <CarList/>
     <Services/>
     <Testimonial/>

@@ -7,14 +7,15 @@ import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 import CarPriceEstimator from "./components/Prediction/CarPriceEstimator";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Services from "./components/Services/Services";
+import Services from "./components/Home/Services";
 import CarList from "./components/CarList/CarList";
-import AppStoreBanner from "./components/AppStoreBanner/AppStoreBanner";
 import Contact from "./components/Contact/Contact";
 import Testimonial from "./components/Testimonial/Testimonial";
-import Footer from "./components/Footer/Footer";
-import { Home } from "./Home";
+import Footer from "./components/Home/Footer";
+import {Home } from "./components/Home/Home";
+import Seller from "./components/Home/Seller";
+import SellerPage from "./components/SellerPage/sellerpage";
+import SearchPage from "./components/CarDetails/SearchPage";
 
 const App = () => {
   // dark mode start
@@ -25,22 +26,18 @@ const App = () => {
     <Router>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                   <Route path="/navbar" element={<Navbar/>} />
-                    <Route path="/about" element={<About/>} />
+                    <Route path="/navbar" element={<Navbar/>} />
+                    <Route path="/seller" element={<Seller/>} />
                     <Route path="/hero" element={<Hero/>} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/carlist" element={<CarList/>} />
+                    <Route path="/search" element={<SearchPage/>}/>
                     <Route path="/testimonal" element={<Testimonial />} />
-                    <Route
-                        path="/contact"
-                        element={<Contact />}
-                    />
-                      <Route path="/prediction" element={<CarPriceEstimator/>} />
-
-                    <Route
-                        path="/footer"
-                        element={<Footer />}
-                    />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/prediction" element={<CarPriceEstimator/>} />
+                    <Route path="/footer" element={<Footer />}/>
+                    <Route path="/home" element={<Home/>}/>
+                    <Route path="/sellerPage" element={<SellerPage/>}/>
                 </Routes>
             </Router>
     </div>

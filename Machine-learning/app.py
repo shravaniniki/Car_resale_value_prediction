@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pickle
 import pandas as pd
-
+import numpy as np
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
@@ -33,6 +33,7 @@ def index():
 def predict():
     data = request.json
     car_name = data['car_name']
+    print(car_name)
     vehicle_age = int(data['vehicle_age'])
     km_driven = int(data['km_driven'])
     seller_type = int(data['seller_type'])
@@ -42,13 +43,30 @@ def predict():
     engine = float(data['engine'])
     max_power = float(data['max_power'])
     seats = int(data['seats'])
+    print(vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats)
+    
+    
+    prediction=model.predict(pd.DataFrame(columns=['car_name','vehicle_age','km_driven','seller_type','fuel_type','transmission_type','mileage','engine','max_power','seats'],data=np.array([car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats]).reshape(1,10)))
 
-    # Assuming model.predict takes a 2D array as input
-    prediction = model.predict(pd.DataFrame([[car_name, vehicle_age, km_driven, seller_type, fuel_type, transmission_type, mileage, engine, max_power, seats]]))
+    print(round(prediction[0]))
+    result = prediction[0]
 
-    # Return prediction as JSON response
-    return jsonify({'prediction': prediction.tolist()})
+# Convert the float value to a string
+    result_str = str(result)
 
+# Create a JSON response with the result
+    response = jsonify({"result": result_str})
+
+# Return the response
+    return response
+
+    # # Assuming model.predict takes a 2D array as input
+    # prediction = model.predict(pd.DataFrame([car_name, vehicle_age, km_driven, seller_type, fuel_type, transmission_type, mileage, engine, max_power, seats]))
+    # print(prediction.tolist())
+    # # Return prediction as JSON response
+    return jsonify({'prediction': prediction[0]})
+    #return jsonify({prediction[0]})
+    #return "HEllo"
 @app.route('/car_names')
 def get_car_names():
     try:
