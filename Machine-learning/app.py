@@ -64,7 +64,6 @@ def predict():
     # prediction = model.predict(pd.DataFrame([car_name, vehicle_age, km_driven, seller_type, fuel_type, transmission_type, mileage, engine, max_power, seats]))
     # print(prediction.tolist())
     # # Return prediction as JSON response
-    return jsonify({'prediction': prediction[0]})
     #return jsonify({prediction[0]})
     #return "HEllo"
 @app.route('/car_names')
