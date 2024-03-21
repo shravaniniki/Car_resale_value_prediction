@@ -110,7 +110,7 @@ function CarPriceEstimator() {
                 <button type="submit">Predict Selling Price</button>
                 <br/>
                 <p>Predicted Selling Price: {prediction}</p>
-
+                 
             </form>
         </>
     );

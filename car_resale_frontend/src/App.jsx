@@ -16,6 +16,8 @@ import {Home } from "./components/Home/Home";
 import Seller from "./components/Home/Seller";
 import SellerPage from "./components/SellerPage/sellerpage";
 import SearchPage from "./components/CarDetails/SearchPage";
+import Login from "./components/Registration/Login";
+import SearchManufacturer from "./components/Buyer/SearchManufacturer";
 
 const App = () => {
   // dark mode start
@@ -35,9 +37,11 @@ const App = () => {
                     <Route path="/testimonal" element={<Testimonial />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/prediction" element={<CarPriceEstimator/>} />
+                    <Route path="/manufacturer" element={<SearchManufacturer/>}/>
                     <Route path="/footer" element={<Footer />}/>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/sellerPage" element={<SellerPage/>}/>
+                    <Route path="/login" element={<Login/>}/>
                 </Routes>
             </Router>
     </div>
