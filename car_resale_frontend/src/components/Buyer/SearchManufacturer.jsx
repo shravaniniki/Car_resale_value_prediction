@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-
+import Navbar from "../Navbar/Navbar";
 const manufacturers = [
   "Acura",
   "Alfa Romeo",
@@ -59,6 +59,8 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }) => {
         );
 
   return (
+    <>
+    <Navbar/>
     <div className='search-manufacturer'>
       <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className='relative w-full'>
@@ -128,6 +130,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }) => {
         </div>
       </Combobox>
     </div>
+    </>
   );
 };
 

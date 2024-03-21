@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
 import './CarPriceEstimator.css'
+import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 
 function CarPriceEstimator() {
     const [prediction, setPrediction] = useState('');
@@ -20,7 +21,17 @@ function CarPriceEstimator() {
         max_power: '',
         seats: ''
     });
-
+    const navigate = useNavigate(); // Initialize useHistory hook
+     const goToSellPage=()=>{
+    const sellCar = window.confirm('Do you want to sell your car?');
+    if (sellCar) {
+        // Redirect to the selling page
+        navigate('/sellerPage', { state: { formData, prediction } })
+        } else {
+        // Display a thank you message
+        alert('Thank you! You can explore our page further.');
+    }
+}
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -30,6 +41,7 @@ function CarPriceEstimator() {
                 console.log(response.data.result);
                 console.log("Hello")
                 setPrediction(response.data.result);
+                  // Prompt the user to sell the car
             })
             .catch(error => {
                 console.error('Prediction API error:', error);
@@ -56,6 +68,7 @@ function CarPriceEstimator() {
         <>
             <Navbar />
             <br />
+            <h1 style={{ textAlign :"center",fontWeight:"bolder",fontSize:20}}>Predict your Car Resale Price </h1>
             <form onSubmit={handleSubmit} className='form-container'>
             <label htmlFor="car_name">Car Name:</label>
                 <select name="car_name" value={formData.car_name} onChange={handleChange}>
@@ -109,7 +122,7 @@ function CarPriceEstimator() {
                 <input type="number" name="seats" placeholder="Seats" onChange={handleChange} />
                 <button type="submit">Predict Selling Price</button>
                 <br/>
-                <p>Predicted Selling Price: {prediction}</p>
+                <p onClick={goToSellPage}>Predicted Selling Price: {prediction}</p>
                  
             </form>
         </>

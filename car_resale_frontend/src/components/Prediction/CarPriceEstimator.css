@@ -3,7 +3,7 @@
 /* Style for the form container */
 .form-container {
     max-width: 500px;
-    margin: 50px auto; /* Center the form vertically and add some top margin */
+    margin: 0px auto; /* Center the form vertically and add some top margin */
     padding: 20px; /* Add padding for better spacing */
     background-color: #ffffff; /* Set background color to white */
     border-radius: 10px; /* Add rounded corners */
@@ -42,5 +42,6 @@ button[type="submit"]:hover {
 .predicted-price {
     font-size: 24px; /* Increase font size for better readability */
     margin-top: 20px;
-    text-align: center; /* Center the text */
+    text-align: center;
+    font-weight: bolder; /* Center the text */
 }
