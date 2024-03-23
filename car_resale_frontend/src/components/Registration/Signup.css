@@ -1,0 +1,13 @@
+.additional-options {
+    display: flex;
+    margin-top: 15px;
+  }
+  
+  .additional-options a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .additional-options a:hover {
+    text-decoration: underline;
+  }

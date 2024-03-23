@@ -8,8 +8,7 @@ import { useLocation } from 'react-router-dom';
 function SellerPage ()  {
   const location = useLocation();
   const { formData, prediction } = location.state;
-  const [carDetails, setCarDetails] = useState(formData,{prediction,image:[]});
-   console.log(prediction)
+  const [carDetails, setCarDetails] = useState(formData,{prediction,description:'',image:[]});
 
   const [file, setFile] = useState();
   function handleChange(e) {
@@ -59,7 +58,7 @@ function SellerPage ()  {
             type="text"
             name="car_name"
             value={carDetails.car_name}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/>
       
         <label>Vehicle Age</label>
@@ -67,42 +66,42 @@ function SellerPage ()  {
             type="text"
             name="vehicle_age"
             value={carDetails.vehicle_age}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Kms Driven</label>
           <input
             type="text"
             name="km_driven"
             value={carDetails.km_driven}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Seller Type</label>
           <input
             type="text"
             name="seller_type"
             value={carDetails.seller_type}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Fuel Type</label>
           <input
             type="text"
             name="fuel_type"
             value={carDetails.fuel_type}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/>
           <label>Transmission Type</label>
           <input
             type="text"
             name="transmission_type"
             value={carDetails.transmission_type}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/>        
           <label>Mileage</label>
           <input
             type="number"
             name="mileage"
             value={carDetails.mileage}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/>     
            <label>Engine</label>
           <input
@@ -116,39 +115,40 @@ function SellerPage ()  {
             type="number"
             name="max_power"
             value={carDetails.max_power}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Mileage</label>
           <input
             type="number"
             name="mileage"
             value={carDetails.mileage}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
            <label>Seats</label>
           <input
             type="number"
             name="seats"
             value={carDetails.seats}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Predicted Price</label>
           <input type="number" step="0.01" name="prediction" 
           value={prediction} 
-          onChange={handleChange}/>
+          onChange={handleOnChange}/>
+
            <label>About Car</label>
           <input
             type="text"
-            name="descripton"
+            name="description"
             value={carDetails.description}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
           <label>Upload Car Image</label>
           <input
            id="image"
            type="file"
            name="image"
-           onChange={handleOnChange}
+           onChange={handleChange}
            value={carDetails.target}
           required/>
           <br/>

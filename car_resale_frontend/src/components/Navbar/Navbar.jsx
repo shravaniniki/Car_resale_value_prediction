@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
-import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
-import ResponsiveMenu from "./ResponsiveMenu";
+
+import { FaUserCircle } from "react-icons/fa";
 
 export const Navlinks = [
   {
@@ -25,13 +25,14 @@ export const Navlinks = [
     link: "/prediction",
   },
 ];
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = ({ theme, setTheme,username }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
   return (
+    <>
     <div
       className="relative z-10 shadow-md w-full dark:bg-black dark:text-white duration-300
     " 
@@ -42,7 +43,7 @@ const Navbar = ({ theme, setTheme }) => {
             <span className="text-3xl font-bold font-serif"> <a href={"/"}>CarSell</a></span>
           </div>
           <nav className="hidden md:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-10">
               {Navlinks.map(({ id, name, link }) => (
                 <li key={id} className="py-4">
                   <a
@@ -65,41 +66,22 @@ const Navbar = ({ theme, setTheme }) => {
                   className="text-2xl"
                 />
               )}
+        {username && (
+                  <div>
+                    <FaUserCircle size={50} />
+                    <h1>{username}</h1>
+                  </div>
+                )}
             </ul>
+        
           </nav>
-          {/* Mobile view  */}
-          <div className="flex items-center gap-4 md:hidden ">
-            {/* dark  mode */}
-            {theme === "dark" ? (
-              <BiSolidSun
-                onClick={() => setTheme("light")}
-                className="text-2xl"
-              />
-            ) : (
-              <BiSolidMoon
-                onClick={() => setTheme("dark")}
-                className="text-2xl"
-              />
-            )}
-            {/* Mobile Hamburger icon */}
-            {showMenu ? (
-              <HiMenuAlt1
-                onClick={toggleMenu}
-                className=" cursor-pointer transition-all"
-                size={30}
-              />
-            ) : (
-              <HiMenuAlt3
-                onClick={toggleMenu}
-                className="cursor-pointer transition-all"
-                size={30}
-              />
-            )}
-          </div>
-        </div>
+          
+       
+       
       </div>
-      <ResponsiveMenu showMenu={showMenu} />
     </div>
+    </div>
+    </>
   );
 };
 

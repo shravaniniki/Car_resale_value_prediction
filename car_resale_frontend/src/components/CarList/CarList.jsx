@@ -34,7 +34,7 @@ const CarList = () => {
   return (
     <>
     <br/>
-    <div className="pb-24" id="carlist">
+    <div className="pb-24" id="carlist" >
       <div className="container">
         {/* Heading */}
         <h1
@@ -47,7 +47,7 @@ const CarList = () => {
           looking to buy a car! checkout our recommendations f
         </p>
         {/* Car listing */}
-        <div>
+        <div className="card">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
             {carList.map((data) => (
               <div
@@ -65,7 +65,7 @@ const CarList = () => {
                 <div className="space-y-2">
                   <h1 className="text-primary font-semibold">{data.name}</h1>
                   <div className="flex justify-between items-center text-xl font-semibold">
-                    <p>${data.price}/Day</p>
+                    <p>${data.price}</p>
                     <a href="#">Details</a>
                   </div>
                 </div>

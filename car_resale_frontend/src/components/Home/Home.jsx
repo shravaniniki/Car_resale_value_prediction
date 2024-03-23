@@ -10,10 +10,13 @@ import Testimonial from "../Testimonial/Testimonial";
 import Contact from "../Contact/Contact";
 import Footer from "./Footer";
 import Seller from "./Seller";
+import { useNavigate } from "react-router-dom";
 
 
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const { username } = navigate.state || {}; 
     const [theme, setTheme] = useState(
         localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
       );
@@ -41,7 +44,7 @@ export const Home = () => {
       }, []);
   return (
     <>
-    <Navbar theme={theme} setTheme={setTheme} />
+    <Navbar theme={theme} setTheme={setTheme} username={username}/>
     <Hero theme={theme} />
     <Seller/>
     <CarList/>

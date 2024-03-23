@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function Seller() {
   const navigate = useNavigate();
   const navigateToSellerpage=()=>{
-    navigate('/sellerPage');
+    navigate('/prediction');
   };
 
   return (
@@ -29,8 +29,8 @@ function Seller() {
                 Do you want to sell your car?
               </h1>
               <p data-aos="fade-up" className="leading-8 tracking-wide">
-                At CarSell we help car buyers and sellers to sell and buy their car's in 
-                atmost ease and trust with high security. 
+                At CarSell we help car buyers and sellers to sell. So start by predicting your car resale value 
+                and sell your car. 
               </p>
               <p data-aos="fade-up">
                 We help Car owners to predict their car price by our highly accurate car price predictor
