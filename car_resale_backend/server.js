@@ -53,6 +53,37 @@ app.post("/login", (req, res) => {
   )
 })
 
+app.post("/sellerpage", (req, res) => {
+    const { user } = req.body;
+    if (!user || !user.isAuthenticated) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+    const car_name = req.body.car_name
+    const vehicle_age = req.body.vehicle_age
+    const km_driven = req.body.km_driven
+    const seller_type = req.body.seller_type
+    const fuel_type = req.body.fuel_type
+    const transmission_type = req.body.transmission_type
+    const mileage = req.body.mileage
+    const engine = req.body.engine
+    const max_power = req.body.max_power
+    const seats = req.body.seats
+    const prediction = req.body.prediction;
+    const description = req.body.description;
+    con.query("INSERT INTO sellerpage (car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats,prediction,description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats,prediction,description], 
+    (err, result) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send({ message: "Internal Server Error" });
+      } else {
+          
+              console.log(result);
+              res.send(result);
+          }
+        }
+    )
+  })
+
 
 
 app.listen(8081, () => {

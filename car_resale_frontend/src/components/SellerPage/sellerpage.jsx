@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 function SellerPage ()  {
   const location = useLocation();
   const { formData, prediction } = location.state;
-  const [carDetails, setCarDetails] = useState(formData,{prediction,description:'',image:[]});
+  const [carDetails, setCarDetails] = useState({...formData,prediction:prediction || '',description:''});
 
   const [file, setFile] = useState();
   function handleChange(e) {
@@ -20,6 +20,7 @@ function SellerPage ()  {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setCarDetails({ ...carDetails, [name]: value });
+    console.log(carDetails.prediction)
   };
 
   const handlePhotoUpload = (e) => {
@@ -40,8 +41,23 @@ function SellerPage ()  {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form Submitted Successfully")
-    console.log('Form submitted:', carDetails);
+    const user={isAuthenticated: true};
+    fetch('http://localhost:8081/sellerpage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...carDetails, user }) // Add user obje)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Prediction:', data);
+      // Handle success or display error messages
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle error
+    });
   };
 
   return (
@@ -133,7 +149,7 @@ function SellerPage ()  {
           required/> 
           <label>Predicted Price</label>
           <input type="number" step="0.01" name="prediction" 
-          value={prediction} 
+          value={carDetails.prediction} 
           onChange={handleOnChange}/>
 
            <label>About Car</label>

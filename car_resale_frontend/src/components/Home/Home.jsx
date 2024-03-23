@@ -50,7 +50,6 @@ export const Home = () => {
     <CarList/>
     <Services/>
     <Testimonial/>
-    <Contact/>
     <Footer/>
     </>
   )

@@ -4,7 +4,7 @@ const testimonialData = [
   {
     name: "Lakshni",
     image: "",
-    description: "never thought selling my car would be this easy.",
+    description: "never thought predict my car price would be this easy.",
     aosDelay: "0",
   },
   {
@@ -34,9 +34,7 @@ const Testimonial = () => {
             >
               What Our Clients Say About Us
             </p>
-            <p data-aos="fade-up" className="text-center sm:px-44">
-              client's are our first priority and that is why we keep all our transactions transparent
-            </p>
+           
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-black dark:text-white">

@@ -31,6 +31,7 @@ const Navbar = ({ theme, setTheme,username }) => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+  console.log(username);
   return (
     <>
     <div
@@ -66,12 +67,10 @@ const Navbar = ({ theme, setTheme,username }) => {
                   className="text-2xl"
                 />
               )}
-        {username && (
                   <div>
                     <FaUserCircle size={50} />
                     <h1>{username}</h1>
                   </div>
-                )}
             </ul>
         
           </nav>

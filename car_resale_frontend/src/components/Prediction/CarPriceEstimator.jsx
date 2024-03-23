@@ -26,7 +26,7 @@ function CarPriceEstimator() {
     const sellCar = window.confirm('Do you want to sell your car?');
     if (sellCar) {
         // Redirect to the selling page
-        navigate('/sellerPage', { state: { formData, prediction } })
+        navigate('/sellerpage', { state: { formData, prediction } })
         } else {
         // Display a thank you message
         alert('Thank you! You can explore our page further.');

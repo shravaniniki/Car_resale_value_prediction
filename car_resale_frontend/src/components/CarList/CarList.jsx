@@ -6,20 +6,20 @@ import { useNavigate } from "react-router-dom";
 
 const carList = [
   {
-    name: "MAHENDRA",
-    price: 4500000,
+    name: "Maruti Alto",
+    price: 450000,
     image: whiteCar,
     aosDelay: "0",
   },
   {
-    name: "KIA UX",
-    price: 1100000,
+    name: "Hyundai i20",
+    price: 110000,
     image: car2,
     aosDelay: "500",
   },
   {
-    name: "BMW X",
-    price: 5500000,
+    name: "Ford Figo",
+    price: 550000,
     image: car3,
     aosDelay: "1000",
   },
@@ -44,7 +44,7 @@ const CarList = () => {
           Car's for Sale
         </h1>
         <p data-aos="fade-up" aos-delay="400" className="text-sm pb-10">
-          looking to buy a car! checkout our recommendations f
+          looking to buy a car! checkout our recommendations 
         </p>
         {/* Car listing */}
         <div className="card">
@@ -65,7 +65,7 @@ const CarList = () => {
                 <div className="space-y-2">
                   <h1 className="text-primary font-semibold">{data.name}</h1>
                   <div className="flex justify-between items-center text-xl font-semibold">
-                    <p>${data.price}</p>
+                    <p>{data.price}</p>
                     <a href="#">Details</a>
                   </div>
                 </div>
