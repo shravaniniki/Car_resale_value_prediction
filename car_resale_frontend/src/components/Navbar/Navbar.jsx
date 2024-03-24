@@ -16,7 +16,7 @@ export const Navlinks = [
   },
   {
     id: 3,
-    name: "BUYER",
+    name: "USED CARS",
     link: "/#carlist",
   },
   {
@@ -27,7 +27,7 @@ export const Navlinks = [
 ];
 const Navbar = ({ theme, setTheme,username }) => {
   const [showMenu, setShowMenu] = useState(false);
-
+  console.log(username)
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };

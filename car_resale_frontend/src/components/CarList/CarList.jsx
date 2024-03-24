@@ -29,7 +29,7 @@ const CarList = () => {
   const navigate=useNavigate();
 
   const navigateToSearchpage=()=>{
-    navigate("/manufacturer")
+    navigate("/search")
   }
   return (
     <>

@@ -1,12 +1,13 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-
+const multer = require('multer');
 const app = express();
 
-app.use(express.json());
-app.use(cors());
-
+app.use(express.json({ limit: '10mb' }));
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 const con = mysql.createConnection({
     user: "root",
     host: "localhost",
@@ -14,6 +15,15 @@ const con = mysql.createConnection({
     database: "registration"
 })
 
+con.connect(function(err) {
+  if (err) {
+      console.error('Error connecting to database');
+      return;
+  }
+  console.log('Connected to database');
+});
+
+ 
 app.post('/signup', (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
@@ -53,39 +63,48 @@ app.post("/login", (req, res) => {
   )
 })
 
-app.post("/sellerpage", (req, res) => {
-    const { user } = req.body;
-    if (!user || !user.isAuthenticated) {
-      return res.status(401).send({ message: "Unauthorized" });
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + "/images"); // Use __dirname to get the current directory path
+    },
+    filename: function(req, file, cb) {
+        cb(null, `${Date.now()}_${file.originalname}`);
     }
-    const car_name = req.body.car_name
-    const vehicle_age = req.body.vehicle_age
-    const km_driven = req.body.km_driven
-    const seller_type = req.body.seller_type
-    const fuel_type = req.body.fuel_type
-    const transmission_type = req.body.transmission_type
-    const mileage = req.body.mileage
-    const engine = req.body.engine
-    const max_power = req.body.max_power
-    const seats = req.body.seats
+});
+
+const upload = multer({ storage });
+
+app.post("/sellerpage", upload.single('image'), (req, res) => {
+  
+    const car_name =req.body.car_name;
+    const vehicle_age = req.body.vehicle_age;
+    const km_driven= req.body.km_driven;
+    const seller_type = req.body.seller_type;
+    const fuel_type = req.body.fuel_type;
+    const transmission_type =  req.body.transmission_type;
+    const mileage = req.body.mileage;
+    const engine = req.body.engine;
+    const max_power = req.body.max_power;
+    const seats = req.body.seats;
     const prediction = req.body.prediction;
     const description = req.body.description;
-    con.query("INSERT INTO sellerpage (car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats,prediction,description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats,prediction,description], 
-    (err, result) => {
-      if (err) {
-          console.error(err);
-          res.status(500).send({ message: "Internal Server Error" });
-      } else {
-          
-              console.log(result);
-              res.send(result);
-          }
+     
+    const image = req.file.filename;
+    const query = "INSERT INTO sellerpage (car_name,vehicle_age,km_driven,seller_type,fuel_type,transmission_type,mileage,engine,max_power,seats,prediction,description,image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    con.query(query, [car_name, vehicle_age, km_driven, seller_type, fuel_type, transmission_type, mileage, engine, max_power, seats, prediction, description, image], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: "Internal Server Error" });
+        } else {
+            console.log(result);
+            res.send(result);
         }
-    )
-  })
-
-
+    });
+});
 
 app.listen(8081, () => {
     console.log("running backend server");
-})
+});

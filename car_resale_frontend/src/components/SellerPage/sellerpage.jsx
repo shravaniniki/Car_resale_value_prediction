@@ -1,75 +1,69 @@
 // SellerPage.jsx
-
 import React, { useState } from 'react';
 import './sellerPage.css'; // Import CSS file
 import Navbar from '../Navbar/Navbar';
 import { useLocation } from 'react-router-dom';
-
-function SellerPage ()  {
+import axios from 'axios'
+function SellerPage() {
   const location = useLocation();
   const { formData, prediction } = location.state;
-  const [carDetails, setCarDetails] = useState({...formData,prediction:prediction || '',description:''});
-
-  const [file, setFile] = useState();
-  function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-}
-  
+  const [carDetails, setCarDetails] = useState({
+    ...formData,
+    prediction: prediction,
+    description: '',
+    image: [], // Changed to null initially
+  });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setCarDetails({ ...carDetails, [name]: value });
-    console.log(carDetails.prediction)
   };
 
   const handlePhotoUpload = (e) => {
-    const files = e.target.files;
-    const uploadedPhotos = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        uploadedPhotos.push(reader.result);
-        if (uploadedPhotos.length === files.length) {
-          setCarDetails({ ...carDetails, image: uploadedPhotos });
-        }
-      };
-    }
+    const file = e.target.files[0];
+    setCarDetails({ ...carDetails, image: file });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user={isAuthenticated: true};
-    fetch('http://localhost:8081/sellerpage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ...carDetails, user }) // Add user obje)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Prediction:', data);
-      // Handle success or display error messages
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle error
-    });
-  };
+    const formData = new FormData();
+    formData.append('car_name', carDetails.car_name);
+   formData.append('vehicle_age', carDetails.vehicle_age);
+   formData.append('km_driven', carDetails.km_driven);
+   formData.append('seller_type', carDetails.seller_type);
+   formData.append('fuel_type', carDetails.fuel_type);
+   formData.append('transmission_type', carDetails.transmission_type);
+   formData.append('mileage', carDetails.mileage);
+   formData.append('engine', carDetails.engine);
+   formData.append('max_power', carDetails.max_power);
+   formData.append('seats', carDetails.seats);
+   formData.append('prediction', carDetails.prediction);
+   formData.append('description', carDetails.description);
+   formData.append('image', carDetails.image);
 
+     const user={isAuthenticated: true}
+     axios.post('http://localhost:8081/sellerpage', formData, {
+      headers: {
+          'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data
+      }
+  })
+  .then(response => {
+      console.log('Response:', response.data);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+}
   return (
     <>
-    <Navbar/>
-    <br/>
-    <br/>
-    <div className="seller-page-container" id='search'>
-      <h1>Sell Your Car</h1>
-      <form onSubmit={handleSubmit}>
-       
-          <label>Car Name</label>
+      <Navbar />
+      <br />
+      <br />
+      <div className="seller-page-container" id="search">
+        <h1>Sell Your Car</h1>
+        <form onSubmit={handleSubmit}>
+
+        <label>Car Name</label>
           <input
             type="text"
             name="car_name"
@@ -124,7 +118,7 @@ function SellerPage ()  {
             type="number"
             name="engine"
             value={carDetails.engine}
-            onChange={handleChange}
+            onChange={handleOnChange}
           required/> 
            <label>Maximum Power</label>
           <input
@@ -161,19 +155,20 @@ function SellerPage ()  {
           required/> 
           <label>Upload Car Image</label>
           <input
-           id="image"
-           type="file"
-           name="image"
-           onChange={handleChange}
-           value={carDetails.target}
-          required/>
-          <br/>
-          <br/>
+            id="image"
+            type="file"
+            name="image"
+            onChange={handlePhotoUpload}
+            accept="image/*" // accept only image files
+            required
+          />
+          <br />
+          <br />
           <button type="submit">Submit</button>
-      </form>
-    </div>
+        </form>
+      </div>
     </>
   );
-};
+}
 
 export default SellerPage;

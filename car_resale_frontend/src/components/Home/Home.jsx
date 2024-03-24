@@ -7,7 +7,6 @@ import Hero from "../Hero/Hero";
 import CarList from "../CarList/CarList";
 import Services from "./Services";
 import Testimonial from "../Testimonial/Testimonial";
-import Contact from "../Contact/Contact";
 import Footer from "./Footer";
 import Seller from "./Seller";
 import { useNavigate } from "react-router-dom";
