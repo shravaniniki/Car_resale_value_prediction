@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import './sellerPage.css'; // Import CSS file
 import Navbar from '../Navbar/Navbar';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import axios from 'axios'
 function SellerPage() {
+  const [message, setMessage] = useState('');
+   const navigate=useNavigate();
   const location = useLocation();
   const { formData, prediction } = location.state;
   const [carDetails, setCarDetails] = useState({
@@ -49,9 +51,13 @@ function SellerPage() {
   })
   .then(response => {
       console.log('Response:', response.data);
+      setMessage('Submitted successfully');
+      // Redirect to home page
+      navigate('/');
   })
   .catch(error => {
       console.error('Error:', error);
+      setMessage('Error submitting data');
   });
 }
   return (
@@ -61,6 +67,7 @@ function SellerPage() {
       <br />
       <div className="seller-page-container" id="search">
         <h1>Sell Your Car</h1>
+        {message && <p>{message}</p>}
         <form onSubmit={handleSubmit}>
 
         <label>Car Name</label>

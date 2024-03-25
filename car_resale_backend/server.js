@@ -8,6 +8,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
+app.use('/images',express.static('images'))
+
 const con = mysql.createConnection({
     user: "root",
     host: "localhost",
@@ -73,7 +75,6 @@ const storage = multer.diskStorage({
         cb(null, `${Date.now()}_${file.originalname}`);
     }
 });
-
 const upload = multer({ storage });
 
 app.post("/sellerpage", upload.single('image'), (req, res) => {
@@ -105,6 +106,21 @@ app.post("/sellerpage", upload.single('image'), (req, res) => {
     });
 });
 
+app.get("/cardetails", (req, res) => {
+ 
+    con.query("SELECT * FROM sellerpage", 
+    (err, result) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send({ message: "Internal Server Error" });
+      } else {
+              console.log(result[0]);
+              res.send(result);
+         
+            }
+        }
+    )
+  })
 app.listen(8081, () => {
     console.log("running backend server");
 });
