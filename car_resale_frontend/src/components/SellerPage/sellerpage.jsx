@@ -15,7 +15,9 @@ function SellerPage() {
     description: '',
     image: [], // Changed to null initially
   });
-
+  const changeMessage=()=>{
+    alert("Submitted successfully");
+  }
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setCarDetails({ ...carDetails, [name]: value });
@@ -171,7 +173,7 @@ function SellerPage() {
           />
           <br />
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={changeMessage}>Submit</button>
         </form>
       </div>
     </>

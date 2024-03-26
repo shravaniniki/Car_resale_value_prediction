@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 
 import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export const Navlinks = [
   {
@@ -26,6 +27,11 @@ export const Navlinks = [
   },
 ];
 const Navbar = ({ theme, setTheme,username }) => {
+
+  const navigate =useNavigate();
+  const changeProfile=()=>{
+    navigate("/profile")
+  }
   const [showMenu, setShowMenu] = useState(false);
   console.log(username)
   const toggleMenu = () => {
@@ -68,7 +74,7 @@ const Navbar = ({ theme, setTheme,username }) => {
                 />
               )}
                   <div>
-                    <FaUserCircle size={50} />
+                    <FaUserCircle size={50} onClick={changeProfile}/>
                     <h1>{username}</h1>
                   </div>
             </ul>

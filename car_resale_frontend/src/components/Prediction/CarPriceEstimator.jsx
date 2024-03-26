@@ -1,4 +1,4 @@
-// Frontend - CarPriceEstimator.jsx
+//Frontend - CarPriceEstimator.jsx
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -25,8 +25,14 @@ function CarPriceEstimator() {
      const goToSellPage=()=>{
     const sellCar = window.confirm('Do you want to sell your car?');
     if (sellCar) {
+        const details = window.confirm('Do you want to share your personal details?');
+        if(details){
+            navigate('/sellerpage', { state: { formData, prediction } })
+
+        }else{
         // Redirect to the selling page
-        navigate('/sellerpage', { state: { formData, prediction } })
+        alert('You cannot sell your car without sharing details');
+        }        
         } else {
         // Display a thank you message
         alert('Thank you! You can explore our page further.');
@@ -128,5 +134,4 @@ function CarPriceEstimator() {
         </>
     );
 }
-
 export default CarPriceEstimator;

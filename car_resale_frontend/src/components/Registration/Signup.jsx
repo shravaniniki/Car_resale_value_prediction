@@ -1,7 +1,9 @@
 // SignUpForm.js
 
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import "./Signup.css"
 const Signup = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -18,6 +20,7 @@ const Signup = () => {
       [name]: value
     });
   };
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +35,7 @@ const Signup = () => {
     .then(response => response.json())
     .then(data => {
       console.log('SignUp response:', data);
+      navigate("/login")
       // Handle success or display error messages
     })
     .catch(error => {
@@ -41,32 +45,46 @@ const Signup = () => {
   };
 
   return (
+    <>
+    <div className="login-container" >
+
+      <div className="login-options">
+      <div className="logo-container">
+        <h1>CarSell</h1>
+      </div>
     <div>
-      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+      <div className="form-group" >
           <label>Name:</label>
           <input type="text" name="username" value={formData.username} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Email:</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Phone Number:</label>
           <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Confirm Password:</label>
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
         </div>
         <button type="submit">Sign Up</button>
+
+        <div className="additional-options">
+          <h3>Already an User?</h3>
+          <Link to="/login">Login</Link>
+        </div>
       </form>
     </div>
+    </div>
+    </div>
+    </>
   );
 };
 

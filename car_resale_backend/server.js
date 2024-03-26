@@ -45,6 +45,22 @@ app.post('/signup', (req, res) => {
     )
 })
 
+app.get("/userdetails", (req, res) => {
+ 
+    con.query("SELECT * FROM signup", 
+    (err, result) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send({ message: "Internal Server Error" });
+      } else {
+              console.log(result[0]);
+              res.send(result);
+         
+            }
+        }
+    )
+  })
+
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

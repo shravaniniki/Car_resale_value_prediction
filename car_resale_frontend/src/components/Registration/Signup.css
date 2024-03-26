@@ -1,13 +1,84 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 160vh;
+  background-image: url(../../assets/carr.png); 
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+  
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #272525;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.logo-container img {
+  width: 100px;
+}
+
+.login-options {
+  background-color:#ffb888;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin-top: -200px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ffc697;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #fa7d42;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #ffc895;
+}
+
 .additional-options {
-    display: flex;
-    margin-top: 15px;
-  }
-  
-  .additional-options a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .additional-options a:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.additional-options a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.additional-options a:hover {
+  text-decoration: underline;
+}

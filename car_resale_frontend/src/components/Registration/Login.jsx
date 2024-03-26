@@ -51,13 +51,11 @@ function Login() {
   return (
 <>
 <div className="login-container" >
-      <div className="logo-container">
-        <img src="/carsell-logo.png" alt="Carsell Logo" />
-        <h1>Welcome to Carsell</h1>
-        <p>Buy and sell cars effortlessly</p>
-      </div>
+      
       <div className="login-options">
-        <h2>Login</h2>
+      <div className="logo-container">
+        <h1>CarSell</h1>
+      </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group" >
             <label>Username</label>

@@ -18,6 +18,7 @@ import SellerPage from "./components/SellerPage/sellerpage";
 import Login from "./components/Registration/Login";
 import Signup from "./components/Registration/Signup";
 import CarPage from "./components/SearchPage/CarPage";
+import Profile from "./components/Navbar/Profile"
 
 const App = () => {
   // dark mode start
@@ -27,7 +28,6 @@ const App = () => {
     <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
     <Router>
                 <Routes>
-                    <Route path="/" element={<Home />}/>
                     <Route path="/navbar" element={<Navbar/>} />
                     <Route path="/seller" element={<Seller/>} />
                     <Route path="/hero" element={<Hero/>} />
@@ -40,8 +40,9 @@ const App = () => {
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/sellerpage" element={<SellerPage/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/" element={<Signup/>}/>
                     <Route path="/page" element={<CarPage/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
                 </Routes>
             </Router>
     </div>
