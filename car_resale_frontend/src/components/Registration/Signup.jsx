@@ -46,7 +46,7 @@ const Signup = () => {
 
   return (
     <>
-    <div className="login-container" >
+    <div className="login-container"  >
 
       <div className="login-options">
       <div className="logo-container">

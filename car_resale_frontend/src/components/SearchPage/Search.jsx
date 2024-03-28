@@ -59,9 +59,9 @@ const Search = () => {
     <>
       <section className='py-4 container'>
         <div className='row justify-content-center'>
-          <div className='container'>
-      <div className='input-wrap'>
-            <SearchIcon/>
+          <div className='container' >
+      <div className='input-wrap'style={{border:'1px solid black'}}>
+            <SearchIcon />
 
               <input
 
@@ -77,7 +77,7 @@ const Search = () => {
             className="fas fa-times"/>
             </div>
           </div>
-          <div className="card" style={{ marginTop: '4rem' }}>
+          <div className="card" style={{ marginTop: '4rem'}}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
               {dataSearch.map((item, index) => (
                 <div key={index} className='col-11 col-md-6 col-lg-3' style={{ width: "300px", borderRadius: "10px", margin: "auto", marginBottom: "4rem" }}>
@@ -88,8 +88,8 @@ const Search = () => {
                        <h5 className='card-title' style={{ fontSize: '1em' }}>Rs.{item.prediction}</h5>
 
                       <div className="card-links" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                        <button className="btn btn-primary" style={{ border: '1px solid black', borderRadius: '10px', fontSize: '1em', marginBottom: '10px' }} onClick={() => displayOwnerDetails(user)}>Owner Details</button>
-                        <button className="btn btn-primary" style={{ border: '1px solid black', borderRadius: '10px', fontSize: '1em' }} onClick={() => displayCarInfo(item)}>Car Info</button>
+                        <button  className="rounded-md bg-primary hover:bg-primary/30 transition duration-500 py-2 px-6 text-black" style={{ border: '1px', borderRadius: '10px', fontSize: '1em', marginBottom: '10px' }} onClick={() => displayOwnerDetails(user)}>Owner Details</button>
+                        <button className="rounded-md bg-primary hover:bg-primary/30 transition duration-500 py-2 px-6 text-black" style={{ border: '1px', borderRadius: '10px', fontSize: '1em' }} onClick={() => displayCarInfo(item)}>Car Info</button>
                       </div>
                     </div>
                   </div>
