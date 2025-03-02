@@ -1,7 +1,7 @@
 # Car_resale_value_prediction
 
 To got to python environment ,
-enter ".\venv\Scripts\actiate"
+enter "venv\Scripts\activate"
 install flask
 To run "python app.py"
 
